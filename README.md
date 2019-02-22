@@ -30,4 +30,4 @@ Following defices are connected and automated in my OpenHab2 automation setup:
 - The same TLS certificates are used by Mosquitto WebSocket.
 - Connection to Telegram Messanger channel for notifications.
 - I use Basic UI for the web-page.
-- On the smart phone I use (OpenHab beta)[https://play.google.com/store/apps/details?id=org.openhab.habdroid.beta&hl=en]. It works fine. But if you do not like "beta" in the name, you can use stable release version instead: (Opena hab)[https://play.google.com/store/apps/details?id=org.openhab.habdroid&hl=en].
+- On the smart phone I use [OpenHab beta](https://play.google.com/store/apps/details?id=org.openhab.habdroid.beta&hl=en). It works fine. But if you do not like "beta" in the name, you can use stable release version instead: [Opena hab](https://play.google.com/store/apps/details?id=org.openhab.habdroid&hl=en).
