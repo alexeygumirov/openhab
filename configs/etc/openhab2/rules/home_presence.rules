@@ -1,0 +1,208 @@
+//Rules to send to Telegram
+rule "Pers1 WiFi presence detection"
+when
+   Item Pers1Smart1 changed
+then
+    
+   var String CurState = Pers1Smart1.state.toString
+   var String ItemName = Pers1Smart1.name
+   var String LogTopic = "home_presence.rules"
+   
+   switch (CurState) {
+       case "OPEN": {
+           logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " changed state to " + CurState)
+	       if ( Pers1_OwnTracks_Close.state == OFF ) { 
+	            Pers1_OwnTracks_Close.postUpdate(ON)
+                logInfo(LogTopic, "GEO PRESENCE: REGION MODE: Pers1 WiFi Presense changed state to ON, therefore " + Pers1_OwnTracks_Close.name + " changed state to " + Pers1_OwnTracks_Close.state.toString )
+	       }
+	       if ( Pers1_OwnTracks_FarAway.state != OFF ) { 
+                Pers1_OwnTracks_FarAway.postUpdate(OFF)
+                logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: Pers1 WiFi Presense changed state to ON, therefore " + Pers1_OwnTracks_FarAway.name + " changed state to " + Pers1_OwnTracks_FarAway.state.toString )
+	       }
+           if (SmartPlug1.state == ON) {
+               SmartPlug1.sendCommand(OFF)
+               sendTelegram("BOT_NAME", "БЕЗОПАСНОСТЬ:\n\nВидеонаблюдение ВЫКЛючено.\n")
+               logInfo(LogTopic, "CAMERA: Video monitoring is OFF.")
+           }
+	       SecMessage.postUpdate("\nСообщений нет.")
+       }
+       case "CLOSED": {
+           logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " changed state to " + CurState)
+       }
+       default: {
+  	       logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " has undefined state: " + CurState)
+       }
+   }
+
+end
+
+rule "Pers2 WiFi presence detection"
+when
+   Item Pers2Smart2 changed
+then
+   
+   var String CurState = Pers2Smart2.state.toString
+   var String ItemName = Pers2Smart2.name
+   var String LogTopic = "home_presence.rules"
+   
+   switch (CurState) {
+       case "OPEN": {
+           logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " changed state to " + CurState)
+	       if ( Pers2_OwnTracks_Close.state == OFF ) {
+	            Pers2_OwnTracks_Close.postUpdate(ON)
+                logInfo(LogTopic, "GEO PRESENCE: REGION MODE: Pers2 WiFi Presense changed state to ON, therefore " + Pers2_OwnTracks_Close.name + " changed state to " + Pers2_OwnTracks_Close.state.toString )
+	       }
+  	       if ( Pers2_OwnTracks_FarAway.state != OFF ) {
+                Pers2_OwnTracks_FarAway.postUpdate(OFF)
+                logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: Pers2 WiFi Presense changed state to ON, therefore " + Pers2_OwnTracks_FarAway.name + " changed state to " + Pers2_OwnTracks_FarAway.state.toString )
+	       }
+           if (SmartPlug1.state == ON) {
+               SmartPlug1.sendCommand(OFF)
+               sendTelegram("BOT_NAME", "Видеонаблюдение ВЫКЛючено.")
+               logInfo(LogTopic, "CAMERA: Video monitoring is OFF.")
+           }
+	       SecMessage.postUpdate("\nСообщений нет.")
+       }
+       case "CLOSED": {
+           logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " changed state to " + CurState)
+       }
+       default: {
+           logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " has undefined state: " + CurState)
+       }
+   }
+
+end
+
+rule "Security Camera rule"
+when
+   Member of gPresenceSummary changed
+then
+
+   var String LogTopic = "home_presence.rules"
+   var String message = SecMessage.state.toString
+
+   if (Pers1PresenceStatus.state.toString == "CLOSEDOFFOFF" && Pers2PresenceStatus.state.toString == "CLOSEDOFFOFF") {
+		if (SmartPlug1.state == OFF) {
+	       SmartPlug1.sendCommand(ON)
+	       logInfo(LogTopic, "CAMERA: Video monitoring is ON.")
+	       sendTelegram("BOT_NAME", "БЕЗОПАСНОСТЬ:\n\nВидеонаблюдение включено.\n")
+     	   SecMessage.postUpdate(message + "\nВидеонаблюдение включено.")
+       } 
+   }
+
+end
+
+rule "Pers1 proximity tracking"
+when
+	Item Pers1_OwnTracks_GeoLoc changed or Item Pers1_OwnTracks_GeoLoc received update
+then
+
+    var PointType home = new PointType("YOUR_HOME_LAT,YOUR_HOME_LON")
+	var PointType Pers1 = new PointType(Pers1_OwnTracks_GeoLoc.state.toString)
+	var String LogTopic = "home_presence.rules"
+    var Number A = Pers1.distanceFrom(home)
+
+    switch A {
+        case A < 80 : {
+			if ( Pers1_OwnTracks_Close.state != ON ) {
+		   	     Pers1_OwnTracks_Close.postUpdate(ON)
+                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to ON.")
+            }
+			if ( Pers1_OwnTracks_FarAway.state != OFF ) {    
+				 Pers1_OwnTracks_FarAway.postUpdate(OFF)
+		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to OFF.")
+		    }
+        }
+        case A < 3500 : {
+			if ( Pers1_OwnTracks_Close.state != OFF ) {
+		   	     Pers1_OwnTracks_Close.postUpdate(OFF)
+                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to OFF.")
+            }
+			if ( Pers1_OwnTracks_FarAway.state != ON ) {    
+				 Pers1_OwnTracks_FarAway.postUpdate(ON)
+		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to ON.")
+		    }
+        }
+        case A >= 3500 : {
+			if ( Pers1_OwnTracks_Close.state != OFF ) {
+		   	     Pers1_OwnTracks_Close.postUpdate(OFF)
+                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to OFF.")
+            }
+			if ( Pers1_OwnTracks_FarAway.state != OFF ) {    
+				 Pers1_OwnTracks_FarAway.postUpdate(OFF)
+		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to OFF.")
+		    }
+		}
+    }
+    
+    Pers1_Distance_from_Home.postUpdate(A)
+
+end
+
+rule "Pers2 proximity tracking"
+when
+	Item Pers2_OwnTracks_GeoLoc changed or Item Pers2_OwnTracks_GeoLoc received update
+then
+
+    var PointType home = new PointType("50.6957525,7.1576210193749994")
+	var PointType Pers2 = new PointType(Pers2_OwnTracks_GeoLoc.state.toString)
+	var String LogTopic = "home_presence.rules"
+    var Number N = Pers2.distanceFrom(home)
+
+    switch N {
+        case N < 80 : {
+			if ( Pers2_OwnTracks_Close.state != ON ) {
+		   	     Pers2_OwnTracks_Close.postUpdate(ON)
+                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to ON.")
+            }
+			if ( Pers2_OwnTracks_FarAway.state != OFF ) {    
+				 Pers2_OwnTracks_FarAway.postUpdate(OFF)
+		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to OFF.")
+		    }
+        }
+        case N < 3500 : {
+			if ( Pers2_OwnTracks_Close.state != OFF ) {
+		   	     Pers2_OwnTracks_Close.postUpdate(OFF)
+                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to OFF.")
+            }
+			if ( Pers2_OwnTracks_FarAway.state != ON ) {  
+				 Pers2_OwnTracks_FarAway.postUpdate(ON)
+		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to ON.")
+		    }
+        }
+        case N >= 3500 : {
+			if ( Pers2_OwnTracks_Close.state != OFF ) {
+		   	     Pers2_OwnTracks_Close.postUpdate(OFF)
+                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to OFF.")
+            }
+			if ( Pers2_OwnTracks_FarAway.state != OFF ) {    
+				 Pers2_OwnTracks_FarAway.postUpdate(OFF)
+		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to OFF.")
+		    }
+		}
+    }
+    
+	Pers2_Distance_from_Home.postUpdate(Pers2.distanceFrom(home)) 	
+end
+
+rule "Pers1 Presence Summary rule"
+when
+   Member of gPers1Presence changed or Member of gPers1Presence received update
+then
+
+   var String PresenceSummary = Pers1Smart1.state.toString + Pers1_OwnTracks_Close.state.toString + Pers1_OwnTracks_FarAway.state.toString
+
+   Pers1PresenceStatus.postUpdate(PresenceSummary)
+
+end
+
+rule "Pers2 Presence Summary rule"
+when
+   Member of gPers2Presence changed or Member of gPers2Presence received update
+then
+
+   var String PresenceSummary = Pers2Smart2.state.toString + Pers2_OwnTracks_Close.state.toString + Pers2_OwnTracks_FarAway.state.toString
+
+   Pers2PresenceStatus.postUpdate(PresenceSummary)
+
+end

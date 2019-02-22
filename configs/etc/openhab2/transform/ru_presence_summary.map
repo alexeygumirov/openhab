@@ -1,0 +1,10 @@
+OPENONOFF=Дома
+OPENOFFOFF=Дома
+OPENONON=Дома
+OPENNULLNULL=Дома
+CLOSEDONOFF=Рядом\ с\ домом\ (<\ 80\ м)
+CLOSEDONON=Рядом\ с\ домом\ (<\ 80\ м)
+CLOSEDOFFON=Далеко\ от\ дома\ (<\ 3.5\ км)
+CLOSEDOFFOFF=Далее,\ чем\ 3.5\ км\ от\ дома
+NULLNULLNULL=Местоположение\ неопр.
+CLOSEDNULLNULL=Не\ дома\ (удаление\ неопр.)

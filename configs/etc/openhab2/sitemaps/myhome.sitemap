@@ -1,0 +1,63 @@
+sitemap myhome label="myhome" icon="firstfloor" {
+
+    Frame label="Кто дома" icon="parents_3_3" {
+
+    Text item=Pers1PresenceStatus icon="man_1" valuecolor=[OPENNULLNULL="green",OPENOFFOFF="green",OPENONOFF="green"]
+	Text item=Pers2PresenceStatus icon="girl_3" valuecolor=[OPENNULLNULL="green",OPENOFFOFF="green",OPENONOFF="green"]
+
+	}
+
+
+    Frame label="Сенсоры" icon="presense" {
+	
+		Text label="Двери" icon="door" { 
+			
+			Text item=Door_Entrance valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Door_Balcony_1 valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Door_Balcony_2 valuecolor=[CLOSED="green",OPEN="red"]
+
+		}
+	
+		Text label="Окна" icon="window"{
+
+			Text item=Window_Kitchen valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_1_BedRoom valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_2_BedRoom valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_BathRoom valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_KidsRoom2 valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_KidsRoom1 valuecolor=[CLOSED="green",OPEN="red"]
+
+		}
+		
+		Text item=BedRoom_Temperature
+		Text item=BedRoom_Humidity
+
+    }
+
+	Frame label="Локация" {
+
+		Mapview item=Pers1_OwnTracks_GeoLoc height=5
+		Mapview item=Pers2_OwnTracks_GeoLoc height=5 
+		Group item=gGeoLoc
+		Text label="WiFi presence" icon="network" {
+
+			Text item=Pers1Smart1 valuecolor=[CLOSED="red",OPEN="green"]
+			Text item=Pers2Smart2 valuecolor=[CLOSED="red",OPEN="green"]
+   
+	}
+ 
+	}
+
+    Frame label="Переключатели" icon="switch" {
+
+		Switch item=SmartPlug1 label="Камера - вход"
+		Switch item=GuestWiFi label="Гостевой WiFi"
+    
+	}
+
+    Frame label="Дополнительно" {
+
+		Group item=gBattery label="Уровнь заряда батарей" icon="batterylevel"
+
+    }
+}

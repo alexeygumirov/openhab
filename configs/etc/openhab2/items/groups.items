@@ -1,0 +1,17 @@
+Group gDoors
+Group gWindows
+Group gSensors
+Group gBattery
+Group gSmartPhones
+Group gGeoLoc
+Group gPresenceIdent
+Group gProxima
+Group gDisto
+Group gLatLon
+Group gWeather
+Group gWeather0
+Group gWeather1
+Group gWeather2
+Group gPers1Presence
+Group gPers2Presence
+Group gPresenceSummary

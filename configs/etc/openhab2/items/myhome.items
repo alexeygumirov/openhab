@@ -1,0 +1,36 @@
+Contact Door_Entrance "Входная дверь [MAP(ru_door.map):%s]" <door> (gSensors, gDoors) { channel="mqtt:topic:myHomeBroker:Door_Entrance_Main:state" }
+Number Battery_Door_Entrance "Заряд батареи сенсора входной двери [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Door_Entrance_Main:battery" }
+
+Contact Door_Balcony_1 "Дверь на балкон - правая [MAP(ru_door.map):%s]" <door> (gSensors, gDoors) { channel="mqtt:topic:myHomeBroker:Door_Balcony_1:state" }
+Number Battery_Door_Balcony_1 "Заряд батареи балконной двери 1 [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Door_Balcony_1:battery" }
+
+Contact Door_Balcony_2 "Дверь на балкон - левая [MAP(ru_door.map):%s]" <door> (gSensors, gDoors) { channel="mqtt:topic:myHomeBroker:Door_Balcony_2:state" }
+Number Battery_Door_Balcony_2 "Заряд батареи балконной двери 2 [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Door_Balcony_2:battery" }
+
+Contact Window_Kitchen "Кухонное окно [MAP(ru_window.map):%s]" <window> (gSensors, gWindows) { channel="mqtt:topic:myHomeBroker:Window_Kitchen:state" }
+Number Battery_Window_Kitchen "Заряд батареи сенсора окна на кухне [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Window_Kitchen:battery" }
+
+Contact Window_1_BedRoom "Окно в детской - правое [MAP(ru_window.map):%s]" <window> (gSensors, gWindows) { channel="mqtt:topic:myHomeBroker:Window_1_BedRoom:state" }
+Number Battery_Window_1_BedRoom "Заряд батареи сенсора правого окна в спальне - детской [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Window_1_BedRoom:battery" }
+
+Contact Window_2_BedRoom "Окно в детской - левое [MAP(ru_window.map):%s]" <window> (gSensors, gWindows) { channel="mqtt:topic:myHomeBroker:Window_2_BedRoom:state" }
+Number Battery_Window_2_BedRoom "Заряд батареи сенсора левого окна в спальне - детской [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Window_2_BedRoom:battery" }
+
+Contact Window_BathRoom "Окно в ванной [MAP(ru_window.map):%s]" <window> (gSensors, gWindows) { channel="mqtt:topic:myHomeBroker:Window_BathRoom:state" }
+Number Battery_Window_BathRoom "Заряд батареи сенсора окна в ванной [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Window_BathRoom:battery" }
+
+Contact Window_KidsRoom2 "Окно в кабинете [MAP(ru_window.map):%s]" <window> (gSensors, gWindows) { channel="mqtt:topic:myHomeBroker:Window_KidsRoom2:state" }
+Number Battery_Window_KidsRoom2 "Заряд батареи сенсора окна в детской 2 - кабинете [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Window_KidsRoom2:battery" }
+
+Contact Window_KidsRoom1 "Окно в спальне [MAP(ru_window.map):%s]" <window> (gSensors, gWindows) { channel="mqtt:topic:myHomeBroker:Window_KidsRoom1:state" } 
+Number Battery_Window_KidsRoom1 "Заряд батареи сенсора окна в детской 1 - спальне [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:Window_KidsRoom1:battery" }
+
+Switch SmartPlug1 "SmartPlug1" <camera> {channel="tplinksmarthome:hs100:home:switch"}
+
+Switch GuestWiFi "Guest WiFi" <network> { fritzboxtr064="wifiGuestSwitch" }
+
+String SecMessage "[%s]" <error> 
+
+Number BedRoom_Temperature "Температура в детской [%.1f °C]" <temperature> (gSensors) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BedRoom:temperature" }
+Number BedRoom_Humidity "Влажность в детской [%.1f %%]" <humidity> (gSensors) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BedRoom:humidity" }
+Number Battery_BedRoom_H_T_Sensor "Заряд батареи датчика вл. и темп. в спальне - детской [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BedRoom:battery" }

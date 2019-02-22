@@ -1,0 +1,44 @@
+homeassistant: false
+permit_join: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: 'mqtt://localhost'
+  user: XXXX
+  password: XXXX
+serial:
+  port: /dev/ttyACM0
+  disable_led: true
+advanced:
+  cache_state: true
+  log_level: info
+devices:
+  '0x00158d0001e7e5f5':
+    friendly_name: Door_Balcony_1
+    retain: true
+  '0x00158d00027b6243':
+    friendly_name: Door_Entrance_Main
+    retain: true
+  '0x00158d00027668fc':
+    friendly_name: Window_Kitchen
+    retain: true
+  '0x00158d00026afa32':
+    friendly_name: Window_KidsRoom2
+    retain: true
+  '0x00158d000241c57f':
+    friendly_name: Window_KidsRoom1
+    retain: true
+  '0x00158d0002b70b70':
+    friendly_name: Door_Balcony_2
+    retain: true
+  '0x00158d0002c66201':
+    friendly_name: Window_1_BedRoom
+    retain: true
+  '0x00158d0002c63909':
+    friendly_name: Window_2_BedRoom
+    retain: true
+  '0x00158d0002b823fb':
+    friendly_name: Window_BathRoom
+    retain: true
+  '0x00158d00025561a3':
+    friendly_name: t_h_sensor_BedRoom
+    retain: true

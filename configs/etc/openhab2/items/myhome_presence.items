@@ -1,0 +1,19 @@
+Contact Pers1Smart1 "Pers1 WiFi [MAP(ru_presence_wifi.map):%s]" <network> (gSmartPhones, gPers1Presence) { fritzboxtr064="maconline:94-65-2d-41-76-89" }
+Switch Pers1_OwnTracks_FarAway "Pers1 Far Away [MAP(ru_presence_far.map):%s]" <motion> (gGeoLoc, gDisto, gPers1Presence)
+Switch Pers1_OwnTracks_Close "Pers1 Close [MAP(ru_presence_close.map):%s]" <smiley> (gGeoLoc, gProxima, gPers1Presence)
+
+Contact Pers2Smart2 "Pers2 WiFi [MAP(ru_presence_wifi.map):%s]" <network> (gSmartPhones, gPers2Presence) {fritzboxtr064="maconline:04-d6-aa-bb-03-c3"}
+Switch Pers2_OwnTracks_FarAway "Pers2 Far Away [MAP(ru_presence_far.map):%s]" <motion> (gGeoLoc, gDisto, gPers2Presence)
+Switch Pers2_OwnTracks_Close "Pers2 Close [MAP(ru_presence_close.map):%s]" <smiley> (gGeoLoc, gProxima, gPers2Presence)
+
+Location Pers1_OwnTracks_GeoLoc "Местоположение Pers1 [%2$s°N ; %3$s°E]" <motion> (gGeoLoc, gLatLon) { channel="mqtt:topic:myHomeBroker:geo_Pers1_Smart1:location" }
+
+Location Pers2_OwnTracks_GeoLoc "Местоположение Pers2 [%2$s°N ; %3$s°E]" <motion> (gGeoLoc, gLatLon) { channel="mqtt:topic:myHomeBroker:geo_Pers2_Smart2:location" }
+
+Number Pers1_Distance_from_Home "Pers1 - удаление от дома [%.2f метров]" <movecontrol> (gGeoLoc)
+
+Number Pers2_Distance_from_Home "Pers2 - удаление от дома [%.2f метров]" <movecontrol> (gGeoLoc)
+
+String Pers1PresenceStatus "Pers1 [MAP(ru_presence_summary.map):%s]" (gPresenceSummary)
+
+String Pers2PresenceStatus "Pers2 [MAP(ru_presence_summary.map):%s]" (gPresenceSummary)
