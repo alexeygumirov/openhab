@@ -23,10 +23,10 @@ Following defices are connected and automated in my OpenHab2 automation setup:
 - TP-Link HS100 SmartPlug (WiFi)
 - Fritz!Box 7490:
 
-	- MAC addresses presence tracking
-	- Guest Wi-Fi ON/OFF control
+	- MAC addresses presence tracking.
+	- Guest Wi-Fi ON/OFF control.
 
-- OpenHab is behind Nginx reverse proxy with TLS authentication (CertBot)
+- OpenHab is behind Nginx reverse proxy with TLS authentication [Let's Encrypt](https://letsencrypt.org/).
 - The same TLS certificates are used by Mosquitto WebSocket.
 - Connection to Telegram Messanger channel for notifications.
 - I use Basic UI for the web-page.
