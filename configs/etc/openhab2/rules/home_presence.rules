@@ -97,45 +97,49 @@ when
 	Item Pers1_OwnTracks_GeoLoc changed or Item Pers1_OwnTracks_GeoLoc received update
 then
 
-    var PointType home = new PointType("YOUR_HOME_LAT,YOUR_HOME_LON")
-	var PointType Pers1 = new PointType(Pers1_OwnTracks_GeoLoc.state.toString)
-	var String LogTopic = "home_presence.rules"
-    var Number A = Pers1.distanceFrom(home)
+	if ( Pers1_OwnTracks_GeoLoc.state.toString != "," )
 
-    switch A {
-        case A < 80 : {
-			if ( Pers1_OwnTracks_Close.state != ON ) {
-		   	     Pers1_OwnTracks_Close.postUpdate(ON)
-                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to ON.")
-            }
-			if ( Pers1_OwnTracks_FarAway.state != OFF ) {    
-				 Pers1_OwnTracks_FarAway.postUpdate(OFF)
-		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to OFF.")
-		    }
-        }
-        case A < 3500 : {
-			if ( Pers1_OwnTracks_Close.state != OFF ) {
-		   	     Pers1_OwnTracks_Close.postUpdate(OFF)
-                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to OFF.")
-            }
-			if ( Pers1_OwnTracks_FarAway.state != ON ) {    
-				 Pers1_OwnTracks_FarAway.postUpdate(ON)
-		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to ON.")
-		    }
-        }
-        case A >= 3500 : {
-			if ( Pers1_OwnTracks_Close.state != OFF ) {
-		   	     Pers1_OwnTracks_Close.postUpdate(OFF)
-                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to OFF.")
-            }
-			if ( Pers1_OwnTracks_FarAway.state != OFF ) {    
-				 Pers1_OwnTracks_FarAway.postUpdate(OFF)
-		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to OFF.")
-		    }
+		var PointType home = new PointType("YOUR_HOME_LAT,YOUR_HOME_LON")
+		var PointType Pers1 = new PointType(Pers1_OwnTracks_GeoLoc.state.toString)
+		var String LogTopic = "home_presence.rules"
+		var Number P1 = Pers1.distanceFrom(home)
+
+		switch P1 {
+			case P1 < 80 : {
+				if ( Pers1_OwnTracks_Close.state != ON ) {
+					 Pers1_OwnTracks_Close.postUpdate(ON)
+					 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to ON.")
+				}
+				if ( Pers1_OwnTracks_FarAway.state != OFF ) {    
+					 Pers1_OwnTracks_FarAway.postUpdate(OFF)
+					 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to OFF.")
+				}
+			}
+			case P1 < 3500 : {
+				if ( Pers1_OwnTracks_Close.state != OFF ) {
+					 Pers1_OwnTracks_Close.postUpdate(OFF)
+					 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to OFF.")
+				}
+				if ( Pers1_OwnTracks_FarAway.state != ON ) {    
+					 Pers1_OwnTracks_FarAway.postUpdate(ON)
+					 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to ON.")
+				}
+			}
+			case P1 >= 3500 : {
+				if ( Pers1_OwnTracks_Close.state != OFF ) {
+					 Pers1_OwnTracks_Close.postUpdate(OFF)
+					 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers1_OwnTracks_Close.name + " changed state to OFF.")
+				}
+				if ( Pers1_OwnTracks_FarAway.state != OFF ) {    
+					 Pers1_OwnTracks_FarAway.postUpdate(OFF)
+					 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers1_OwnTracks_FarAway.name + " changed state to OFF.")
+				}
+			}
 		}
-    }
-    
-    Pers1_Distance_from_Home.postUpdate(A)
+		
+		Pers1_Distance_from_Home.postUpdate(P1)
+
+	}
 
 end
 
@@ -144,45 +148,49 @@ when
 	Item Pers2_OwnTracks_GeoLoc changed or Item Pers2_OwnTracks_GeoLoc received update
 then
 
-    var PointType home = new PointType("50.6957525,7.1576210193749994")
-	var PointType Pers2 = new PointType(Pers2_OwnTracks_GeoLoc.state.toString)
-	var String LogTopic = "home_presence.rules"
-    var Number N = Pers2.distanceFrom(home)
+	if ( Pers2_OwnTracks_GeoLoc.state.toString != "," ) {
 
-    switch N {
-        case N < 80 : {
-			if ( Pers2_OwnTracks_Close.state != ON ) {
-		   	     Pers2_OwnTracks_Close.postUpdate(ON)
-                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to ON.")
-            }
-			if ( Pers2_OwnTracks_FarAway.state != OFF ) {    
-				 Pers2_OwnTracks_FarAway.postUpdate(OFF)
-		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to OFF.")
-		    }
-        }
-        case N < 3500 : {
-			if ( Pers2_OwnTracks_Close.state != OFF ) {
-		   	     Pers2_OwnTracks_Close.postUpdate(OFF)
-                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to OFF.")
-            }
-			if ( Pers2_OwnTracks_FarAway.state != ON ) {  
-				 Pers2_OwnTracks_FarAway.postUpdate(ON)
-		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to ON.")
-		    }
-        }
-        case N >= 3500 : {
-			if ( Pers2_OwnTracks_Close.state != OFF ) {
-		   	     Pers2_OwnTracks_Close.postUpdate(OFF)
-                 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to OFF.")
-            }
-			if ( Pers2_OwnTracks_FarAway.state != OFF ) {    
-				 Pers2_OwnTracks_FarAway.postUpdate(OFF)
-		    	 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to OFF.")
-		    }
+		var PointType home = new PointType("YOUR_HOME_LAT,YOUR_HOME_LON")
+		var PointType Pers2 = new PointType(Pers2_OwnTracks_GeoLoc.state.toString)
+		var String LogTopic = "home_presence.rules"
+		var Number P2 = Pers2.distanceFrom(home)
+
+		switch P2 {
+			case P2 < 80 : {
+				if ( Pers2_OwnTracks_Close.state != ON ) {
+					 Pers2_OwnTracks_Close.postUpdate(ON)
+					 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to ON.")
+				}
+				if ( Pers2_OwnTracks_FarAway.state != OFF ) {    
+					 Pers2_OwnTracks_FarAway.postUpdate(OFF)
+					 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to OFF.")
+				}
+			}
+			case P2 < 3500 : {
+				if ( Pers2_OwnTracks_Close.state != OFF ) {
+					 Pers2_OwnTracks_Close.postUpdate(OFF)
+					 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to OFF.")
+				}
+				if ( Pers2_OwnTracks_FarAway.state != ON ) {  
+					 Pers2_OwnTracks_FarAway.postUpdate(ON)
+					 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to ON.")
+				}
+			}
+			case P2 >= 3500 : {
+				if ( Pers2_OwnTracks_Close.state != OFF ) {
+					 Pers2_OwnTracks_Close.postUpdate(OFF)
+					 logInfo(LogTopic, "GEO PRESENCE: CLOSE: The item " + Pers2_OwnTracks_Close.name + " changed state to OFF.")
+				}
+				if ( Pers2_OwnTracks_FarAway.state != OFF ) {    
+					 Pers2_OwnTracks_FarAway.postUpdate(OFF)
+					 logInfo(LogTopic, "GEO PRESENCE: FAR AWAY: The item " + Pers2_OwnTracks_FarAway.name + " changed state to OFF.")
+				}
+			}
 		}
-    }
-    
-	Pers2_Distance_from_Home.postUpdate(Pers2.distanceFrom(home)) 	
+		
+		Pers2_Distance_from_Home.postUpdate(P2)
+
+	}
 end
 
 rule "Pers1 Presence Summary rule"
