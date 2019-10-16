@@ -1,0 +1,235 @@
+Bridge mqtt:broker:myHomeBroker [ host="127.0.0.1", port="1883", secure=false, username="<User name>", password="<password>", clientID="oHab" ] {
+
+	Thing topic zigbeebridge "Zigbee2mqtt Bridge" @ "Home" {
+
+    Channels:
+		Type switch : permitJoin [ commandTopic="zigbee2mqtt/bridge/config/permit_join", on="true", off="false" ]
+		Type string : state [ stateTopic="zigbee2mqtt/bridge/state" ]
+    }
+
+	Thing topic Door_Entrance_Main "Entrance Door Contact" @ "Home" {
+	Channels:
+		Type contact : state "Entrance Door Contact state" [ stateTopic="zigbee2mqtt/Door_Entrance_Main", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Entrance Door Contact battery" [stateTopic="zigbee2mqtt/Door_Entrance_Main", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic Door_Balcony_1 "Balcony Door 1 Contact" @ "Home" {
+	Channels:
+		Type contact : state "Balcony Door 1 state" [ stateTopic="zigbee2mqtt/Door_Balcony_1", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Balcony Door 1 battery" [stateTopic="zigbee2mqtt/Door_Balcony_1", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic Door_Balcony_2 "Balcony Door 2 Contact" @ "Home" {
+	Channels:
+		Type contact : state "Balcony Door 2 state" [ stateTopic="zigbee2mqtt/Door_Balcony_2", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Balcony Door 2 battery" [stateTopic="zigbee2mqtt/Door_Balcony_2", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic Window_Kitchen "Kitchen Window Contact" @ "Home" {
+	Channels:
+		Type contact : state "Kitchen Window state" [ stateTopic="zigbee2mqtt/Window_Kitchen", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Kitchen Window battery" [stateTopic="zigbee2mqtt/Window_Kitchen", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic Window_1_BedRoom "Bed Room Window 1 Contact" @ "Home" {
+	Channels:
+		Type contact : state "Bed Room Window 1 state" [ stateTopic="zigbee2mqtt/Window_1_BedRoom", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Bed Room Window 1 battery" [stateTopic="zigbee2mqtt/Window_1_BedRoom", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic Window_2_BedRoom "Bed Room Window 2 Contact" @ "Home" {
+	Channels:
+		Type contact : state "Bed Room Window 2 state" [ stateTopic="zigbee2mqtt/Window_2_BedRoom", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Bed Room Window 2 battery" [stateTopic="zigbee2mqtt/Window_2_BedRoom", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic Window_BathRoom "Bath Room Window Contact" @ "Home" {
+	Channels:
+		Type contact : state "Bath Room Window state" [ stateTopic="zigbee2mqtt/Window_BathRoom", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Bath Room Window battery" [stateTopic="zigbee2mqtt/Window_BathRoom", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic Window_KidsRoom2 "Window Kids Room 2 Contact" @ "Home" {
+	Channels:
+		Type contact : state "Window Kids Room 2 state" [ stateTopic="zigbee2mqtt/Window_KidsRoom2", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Window Kids Room 2 battery" [stateTopic="zigbee2mqtt/Window_KidsRoom2", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic Window_KidsRoom1 "Window Kids Room 1 Contact" @ "Home" {
+	Channels:
+		Type contact : state "Window Kids Room 1 state" [ stateTopic="zigbee2mqtt/Window_KidsRoom1", transformationPattern="JS:getZigbeeContact.js" ]
+		Type number : battery "Window Kids Room 1 battery" [stateTopic="zigbee2mqtt/Window_KidsRoom1", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic t_h_sensor_BedRoom "Humidity and Temperature Sensor in Bed Room" @ "Home" {
+	Channels:
+		Type number : temperature "Bed Room Temperature" [ stateTopic="zigbee2mqtt/t_h_sensor_BedRoom", transformationPattern="JSONPATH:$.temperature" ]
+		Type number : humidity "Bed Room Humidity" [ stateTopic="zigbee2mqtt/t_h_sensor_BedRoom", transformationPattern="JSONPATH:$.humidity" ]
+		Type number : battery "Bed Room H_T Sensor battery" [stateTopic="zigbee2mqtt/t_h_sensor_BedRoom", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic t_h_sensor_KidRoom1 "Humidity and Temperature Sensor in Kid Room 1" @ "Home" {
+	Channels:
+		Type number : temperature "Kid Room 1 Temperature" [ stateTopic="zigbee2mqtt/t_h_sensor_KidRoom1", transformationPattern="JSONPATH:$.temperature" ]
+		Type number : humidity "Kid Room 1 Humidity" [ stateTopic="zigbee2mqtt/t_h_sensor_KidRoom1", transformationPattern="JSONPATH:$.humidity" ]
+		Type number : battery "Kid Room 1 H_T Sensor battery" [stateTopic="zigbee2mqtt/t_h_sensor_KidRoom1", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic t_h_sensor_KidRoom2 "Humidity and Temperature Sensor in Kid Room 2" @ "Home" {
+	Channels:
+		Type number : temperature "Kid Room 2 Temperature" [ stateTopic="zigbee2mqtt/t_h_sensor_KidRoom2", transformationPattern="JSONPATH:$.temperature" ]
+		Type number : humidity "Kid Room 2 Humidity" [ stateTopic="zigbee2mqtt/t_h_sensor_KidRoom2", transformationPattern="JSONPATH:$.humidity" ]
+		Type number : battery "Kid Room 2 H_T Sensor battery" [stateTopic="zigbee2mqtt/t_h_sensor_KidRoom2", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic t_h_sensor_BathRoom "Humidity and Temperature Sensor in Bath Room" @ "Home" {
+	Channels:
+		Type number : temperature "Bath Room Temperature" [ stateTopic="zigbee2mqtt/t_h_sensor_BathRoom", transformationPattern="JSONPATH:$.temperature" ]
+		Type number : humidity "Bath Room Humidity" [ stateTopic="zigbee2mqtt/t_h_sensor_BathRoom", transformationPattern="JSONPATH:$.humidity" ]
+		Type number : battery "Bath Room H_T Sensor battery" [stateTopic="zigbee2mqtt/t_h_sensor_BathRoom", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic t_h_sensor_Kitchen "Humidity and Temperature Sensor in Kitchen" @ "Home" {
+	Channels:
+		Type number : temperature "Kitchen Temperature" [ stateTopic="zigbee2mqtt/t_h_sensor_Kitchen", transformationPattern="JSONPATH:$.temperature" ]
+		Type number : humidity "Kitchen Humidity" [ stateTopic="zigbee2mqtt/t_h_sensor_Kitchen", transformationPattern="JSONPATH:$.humidity" ]
+		Type number : battery "Kitchen H_T Sensor battery" [stateTopic="zigbee2mqtt/t_h_sensor_Kitchen", transformationPattern="JSONPATH:$.battery"]
+	}
+
+	Thing topic t_h_sensor_LivingRoom "Humidity and Temperature Sensor in Living Room" @ "Home" {
+	Channels:
+		Type number : temperature "Living Room Temperature" [ stateTopic="zigbee2mqtt/t_h_sensor_LivingRoom", transformationPattern="JSONPATH:$.temperature" ]
+		Type number : humidity "Living Room Humidity" [ stateTopic="zigbee2mqtt/t_h_sensor_LivingRoom", transformationPattern="JSONPATH:$.humidity" ]
+		Type number : battery "Living Room H_T Sensor battery" [stateTopic="zigbee2mqtt/t_h_sensor_LivingRoom", transformationPattern="JSONPATH:$.battery"]
+	}
+	
+	Thing topic geo_Person1_Phone "Person1 Phone Location" {
+	Channels:
+		Type string : location_raw "Location Raw of Person1 Phone" [ stateTopic="owntracks/<mosquitto user>/Person1Phone" ]
+	}
+
+	Thing topic geo_Person2_Phone "Person2 Phone Location" {
+	Channels:
+		Type string : location_raw "Location Raw of Person2 Phone" [ stateTopic="owntracks/<mosquitto user>/Person2Phone" ]
+	}
+
+	Thing topic shelly25-BedRoom1 "Bedroom Shelly 2.5 Switch" {
+	Channels:
+		Type switch : PowerSwitch0 [ stateTopic="shellies/shellyswitch25-73C075/relay/0", on="on", off="off", commandTopic="shellies/shellyswitch25-73C075/relay/0/command", on="on", off="off" ]
+		Type number : PowerSwitch0Power [ stateTopic="shellies/shellyswitch25-73C075/relay/0/power" ] 
+		Type number : PowerSwitch0Energy [ stateTopic="shellies/shellyswitch25-73C075/relay/0/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type switch : PowerSwitch1 [ stateTopic="shellies/shellyswitch25-73C075/relay/1", on="on", off="off", commandTopic="shellies/shellyswitch25-73C075/relay/1/command", on="on", off="off" ]
+		Type number : PowerSwitch1Power [ stateTopic="shellies/shellyswitch25-73C075/relay/1/power" ] 
+		Type number : PowerSwitch1Energy [ stateTopic="shellies/shellyswitch25-73C075/relay/1/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type number : Shelly25Temp [ stateTopic="shellies/shellyswitch25-73C075/temperature" ]
+		Type contact : Shelly25Overtemp [ stateTopic="shellies/shellyswitch25-73C075/overtemperature", on="1", off="0" ]
+	}
+
+	Thing topic shelly25-Dille "Dille Shelly 2.5 Switch" {
+	Channels:
+		Type switch : PowerSwitch0 [ stateTopic="shellies/shellyswitch25-5DB05B/relay/0", on="on", off="off", commandTopic="shellies/shellyswitch25-5DB05B/relay/0/command", on="on", off="off" ]
+		Type number : PowerSwitch0Power [ stateTopic="shellies/shellyswitch25-5DB05B/relay/0/power" ] 
+		Type number : PowerSwitch0Energy [ stateTopic="shellies/shellyswitch25-5DB05B/relay/0/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type switch : PowerSwitch1 [ stateTopic="shellies/shellyswitch25-5DB05B/relay/1", on="on", off="off", commandTopic="shellies/shellyswitch25-5DB05B/relay/1/command", on="on", off="off" ]
+		Type number : PowerSwitch1Power [ stateTopic="shellies/shellyswitch25-5DB05B/relay/1/power" ] 
+		Type number : PowerSwitch1Energy [ stateTopic="shellies/shellyswitch25-5DB05B/relay/1/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type number : Shelly25Temp [ stateTopic="shellies/shellyswitch25-5DB05B/temperature" ]
+		Type contact : Shelly25Overtemp [ stateTopic="shellies/shellyswitch25-5DB05B/overtemperature", on="1", off="0" ]
+	}
+
+	Thing topic shelly25-KidRoom1 "KidRoom1 Shelly 2.5 Switch" {
+	Channels:
+		Type switch : PowerSwitch0 [ stateTopic="shellies/shellyswitch25-00961F/relay/0", on="on", off="off", commandTopic="shellies/shellyswitch25-00961F/relay/0/command", on="on", off="off" ]
+		Type number : PowerSwitch0Power [ stateTopic="shellies/shellyswitch25-00961F/relay/0/power" ] 
+		Type number : PowerSwitch0Energy [ stateTopic="shellies/shellyswitch25-00961F/relay/0/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type switch : PowerSwitch1 [ stateTopic="shellies/shellyswitch25-00961F/relay/1", on="on", off="off", commandTopic="shellies/shellyswitch25-00961F/relay/1/command", on="on", off="off" ]
+		Type number : PowerSwitch1Power [ stateTopic="shellies/shellyswitch25-00961F/relay/1/power" ] 
+		Type number : PowerSwitch1Energy [ stateTopic="shellies/shellyswitch25-00961F/relay/1/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type number : Shelly25Temp [ stateTopic="shellies/shellyswitch25-00961F/temperature" ]
+		Type contact : Shelly25Overtemp [ stateTopic="shellies/shellyswitch25-00961F/overtemperature", on="1", off="0" ]
+	}
+
+	Thing topic shelly25-KidRoom2 "KidRoom2 Shelly 2.5 Switch" {
+	Channels:
+		Type switch : PowerSwitch0 [ stateTopic="shellies/shellyswitch25-00B5D7/relay/0", on="on", off="off", commandTopic="shellies/shellyswitch25-00B5D7/relay/0/command", on="on", off="off" ]
+		Type number : PowerSwitch0Power [ stateTopic="shellies/shellyswitch25-00B5D7/relay/0/power" ] 
+		Type number : PowerSwitch0Energy [ stateTopic="shellies/shellyswitch25-00B5D7/relay/0/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type switch : PowerSwitch1 [ stateTopic="shellies/shellyswitch25-00B5D7/relay/1", on="on", off="off", commandTopic="shellies/shellyswitch25-00B5D7/relay/1/command", on="on", off="off" ]
+		Type number : PowerSwitch1Power [ stateTopic="shellies/shellyswitch25-00B5D7/relay/1/power" ] 
+		Type number : PowerSwitch1Energy [ stateTopic="shellies/shellyswitch25-00B5D7/relay/1/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type number : Shelly25Temp [ stateTopic="shellies/shellyswitch25-00B5D7/temperature" ]
+		Type contact : Shelly25Overtemp [ stateTopic="shellies/shellyswitch25-00B5D7/overtemperature", on="1", off="0" ]
+	}
+
+	Thing topic shelly25-KorrDusche "KorrDusche Shelly 2.5 Switch" {
+	Channels:
+		Type switch : PowerSwitch0 [ stateTopic="shellies/shellyswitch25-BA895E/relay/0", on="on", off="off", commandTopic="shellies/shellyswitch25-BA895E/relay/0/command", on="on", off="off" ]
+		Type number : PowerSwitch0Power [ stateTopic="shellies/shellyswitch25-BA895E/relay/0/power" ] 
+		Type number : PowerSwitch0Energy [ stateTopic="shellies/shellyswitch25-BA895E/relay/0/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type switch : PowerSwitch1 [ stateTopic="shellies/shellyswitch25-BA895E/relay/1", on="on", off="off", commandTopic="shellies/shellyswitch25-BA895E/relay/1/command", on="on", off="off" ]
+		Type number : PowerSwitch1Power [ stateTopic="shellies/shellyswitch25-BA895E/relay/1/power" ] 
+		Type number : PowerSwitch1Energy [ stateTopic="shellies/shellyswitch25-BA895E/relay/1/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type number : Shelly25Temp [ stateTopic="shellies/shellyswitch25-BA895E/temperature" ]
+		Type contact : Shelly25Overtemp [ stateTopic="shellies/shellyswitch25-BA895E/overtemperature", on="1", off="0" ]
+	}
+
+	Thing topic shelly25-Bad "Bad Shelly 2.5 Switch" {
+	Channels:
+		Type switch : PowerSwitch0 [ stateTopic="shellies/shellyswitch25-00B579/relay/0", on="on", off="off", commandTopic="shellies/shellyswitch25-00B579/relay/0/command", on="on", off="off" ]
+		Type number : PowerSwitch0Power [ stateTopic="shellies/shellyswitch25-00B579/relay/0/power" ] 
+		Type number : PowerSwitch0Energy [ stateTopic="shellies/shellyswitch25-00B579/relay/0/energy", transformationPattern="JS:convert2kW.js" ]
+
+		Type switch : PowerSwitch1 [ stateTopic="shellies/shellyswitch25-00B579/relay/1", on="on", off="off", commandTopic="shellies/shellyswitch25-00B579/relay/1/command", on="on", off="off" ]
+		Type number : PowerSwitch1Power [ stateTopic="shellies/shellyswitch25-00B579/relay/1/power" ] 
+		Type number : PowerSwitch1Energy [ stateTopic="shellies/shellyswitch25-00B579/relay/1/energy", transformationPattern="JS:convert2kW.js" ]
+
+		Type number : Shelly25Temp [ stateTopic="shellies/shellyswitch25-00B579/temperature" ]
+		Type contact : Shelly25Overtemp [ stateTopic="shellies/shellyswitch25-00B579/overtemperature", on="1", off="0" ]
+	}
+
+	Thing topic shelly25-Wohn "Wohn Shelly 2.5 Switch" {
+	Channels:
+		Type switch : PowerSwitch0 [ stateTopic="shellies/shellyswitch25-BA7544/relay/0", on="on", off="off", commandTopic="shellies/shellyswitch25-BA7544/relay/0/command", on="on", off="off" ]
+		Type number : PowerSwitch0Power [ stateTopic="shellies/shellyswitch25-BA7544/relay/0/power" ] 
+		Type number : PowerSwitch0Energy [ stateTopic="shellies/shellyswitch25-BA7544/relay/0/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type switch : PowerSwitch1 [ stateTopic="shellies/shellyswitch25-BA7544/relay/1", on="on", off="off", commandTopic="shellies/shellyswitch25-BA7544/relay/1/command", on="on", off="off" ]
+		Type number : PowerSwitch1Power [ stateTopic="shellies/shellyswitch25-BA7544/relay/1/power" ] 
+		Type number : PowerSwitch1Energy [ stateTopic="shellies/shellyswitch25-BA7544/relay/1/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type number : Shelly25Temp [ stateTopic="shellies/shellyswitch25-BA7544/temperature" ]
+		Type contact : Shelly25Overtemp [ stateTopic="shellies/shellyswitch25-BA7544/overtemperature", on="1", off="0" ]
+	}
+
+	Thing topic shelly25-Kitchen "Kitchen Shelly 2.5 Switch" {
+	Channels:
+		Type switch : PowerSwitch0 [ stateTopic="shellies/shellyswitch25-00B5D6/relay/0", on="on", off="off", commandTopic="shellies/shellyswitch25-00B5D6/relay/0/command", on="on", off="off" ]
+		Type number : PowerSwitch0Power [ stateTopic="shellies/shellyswitch25-00B5D6/relay/0/power" ] 
+		Type number : PowerSwitch0Energy [ stateTopic="shellies/shellyswitch25-00B5D6/relay/0/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type switch : PowerSwitch1 [ stateTopic="shellies/shellyswitch25-00B5D6/relay/1", on="on", off="off", commandTopic="shellies/shellyswitch25-00B5D6/relay/1/command", on="on", off="off" ]
+		Type number : PowerSwitch1Power [ stateTopic="shellies/shellyswitch25-00B5D6/relay/1/power" ] 
+		Type number : PowerSwitch1Energy [ stateTopic="shellies/shellyswitch25-00B5D6/relay/1/energy", transformationPattern="JS:convert2kW.js" ] 
+
+		Type number : Shelly25Temp [ stateTopic="shellies/shellyswitch25-00B5D6/temperature" ]
+		Type contact : Shelly25Overtemp [ stateTopic="shellies/shellyswitch25-00B5D6/overtemperature", on="1", off="0" ]
+	}
+
+	Thing topic AvatarSonoffPlug01 "Avatar Sonoff Plug 1" @ "Home" {
+    Channels:
+		Type switch : PowerSwitch "Power Switch" [ stateTopic="sonoffPlug01/stat/POWER", commandTopic="sonoffPlug01/cmnd/POWER", on="ON", off="OFF" ]
+		Type number : Power [stateTopic="sonoffPlug01/tele/SENSOR", transformationPattern="JSONPATH:$.ENERGY.Power"]
+		Type number : Total [stateTopic="sonoffPlug01/tele/SENSOR", transformationPattern="JSONPATH:$.ENERGY.Total"]
+    }
+
+}

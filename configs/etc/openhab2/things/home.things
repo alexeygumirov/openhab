@@ -1,0 +1,5 @@
+tplinksmarthome:hs100:home "Entrance" [ ipAddress="<TP-Link HS100 IP address>", refresh=60 ]
+network:pingdevice:fritzbox7490 "FritzBox PING" [ hostname="<Fritz!Box IP address>" ]
+network:servicedevice:fritzbox7490_web "FritzBox Web UI" [ hostname="<Fritz!Box IP address>", port=80 ]
+network:pingdevice:rbpi "Raspberry Pi Jump Host" [ hostname="<Raspberry Pi IP address>" ]
+network:pingdevice:nas "NAS" [ hostname="NAS IP Address" ]
