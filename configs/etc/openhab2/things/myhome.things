@@ -1,5 +1,0 @@
-tplinksmarthome:hs100:home "Entrance" [ ipAddress="192.168.2.151", refresh=60 ]
-network:pingdevice:fritzbox7490 "FritzBox PING" [ hostname="192.168.2.1" ]
-network:servicedevice:fritzbox7490_web "FritzBox Web UI" [ hostname="192.168.2.1", port=80 ]
-network:pingdevice:rbpi "Raspberry Pi Jump Host" [ hostname="192.168.2.110" ]
-network:pingdevice:synology "Synology NAS" [ hostname="192.168.2.100" ]
