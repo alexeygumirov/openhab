@@ -1,0 +1,113 @@
+sitemap wurzerstr89 label="Wurzerstr89" icon="firstfloor" {
+
+    Frame label="Кто дома" icon="parents_3_3" {
+
+    Text item=Person1PresenceStatus icon="man_1" valuecolor=[HOME="green"]
+	Text item=Person2PresenceStatus icon="girl_3" valuecolor=[HOME="green"]
+
+	}
+
+    Frame label="Сенсоры" icon="presense" {
+	
+		Text label="Двери" icon="door" { 
+			
+			Text item=Door_Entrance valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Door_Balcony_1 valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Door_Balcony_2 valuecolor=[CLOSED="green",OPEN="red"]
+
+		}
+	
+		Text label="Окна" icon="window"{
+
+			Text item=Window_Kitchen valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_1_BedRoom valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_2_BedRoom valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_BathRoom valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_KidsRoom2 valuecolor=[CLOSED="green",OPEN="red"]
+			Text item=Window_KidsRoom1 valuecolor=[CLOSED="green",OPEN="red"]
+
+		}
+		
+		Group item=gTemperature label="Температура" icon="temperature"
+		Group item=gHumidity label="Влажность" icon="humidity"
+
+    }
+
+	Frame label="Локация" {
+
+		Mapview item=Person1_OwnTracks_GeoLoc height=5
+		Mapview item=Person2_OwnTracks_GeoLoc height=5 
+		Group item=gGeoLoc
+
+		Text label="WiFi presence" icon="network" {
+
+			Text item=Person1Phone valuecolor=[CLOSED="red",OPEN="green"]
+			Text item=Person2Phone valuecolor=[CLOSED="red",OPEN="green"]
+   
+		}
+ 
+	}
+
+    Frame label="Переключатели" icon="switch" {
+
+		Switch item=GuestWiFi label="Guest WiFi"
+		Switch item=SmartPlug1 label="Камера - вход"
+
+		Text label="Свет" icon="light" {
+
+			Switch item=DilleLight label="Свет в прихожей"
+			Switch item=KorrLight label="Свет в коридоре"
+			Switch item=BedRoomLight label="Свет в детской"
+			Switch item=KidRoom1Light label="Свет в кабинете"
+			Switch item=KidRoom2Light label="Свет в спальне"
+			Switch item=DuscheLight label="Свет в душе"
+			Switch item=BadLight label="Свет в ванной"
+			Switch item=WohnLight2 label="Свет в гостинной (стол)"
+			Switch item=WohnLight1 label="Свет в гостинной (кресло)"
+			Switch item=KitchenLight1 label="Свет в кухне (раковина)"
+			Switch item=KitchenLight2 label="Свет в кухне (верхний)"
+			Switch item=SmartPlug01 label="Светильник в гостинной"
+
+		}
+
+		Switch item=AllLight label="Весь верхний свет"
+		Text label="Умные розетки" icon="poweroutlet" {
+
+			Switch item=SmartPlug02 label="Сушилка"
+
+		}
+		Group item=gSmartPlugPower
+		Group item=gSmartPlugTotal
+    
+	}
+
+    Frame label="Дополнительно" {
+
+		Text label="FritzBox status" icon="settings" {
+
+			Text item=fboxWanIP
+			Text item=fboxDslStatus valuecolor=[Up="green",Down="red"]
+			Text item=fboxDslDownstreamCurrRate
+			Text item=fboxDslUpstreamCurrRate
+			Text item=fboxDslDownstreamMaxRate
+			Text item=fboxDslUpstreamMaxRate
+			Text item=fboxWanPhysicalLinkStatus valuecolor=[Up="green",Down="red"]
+			Text item=fboxWanLayer1DownstreamMaxBitRate
+			Text item=fboxWanLayer1UpstreamMaxBitRate
+			Text item=fboxDslUpstreamNoiseMargin
+			Text item=fboxDslDownstreamNoiseMargin
+			Text item=fboxDslUpstreamAttenuation
+			Text item=fboxDslDownstreamAttenuation
+
+		}
+
+		Chart item=gShellyTemp icon="temperature" label="Температура Shelly" refresh=300000 period=8h legend=true service="influxdb"
+		Group item=gBattery label="Уровнь заряда батарей" icon="batterylevel"
+		Group item=gEnergyCounterkWh label="Счётчики потребления (кВч)" icon="line" 
+		Group item=gShellyEnergyConsumption label="Мгновенное потребление (Вт)" icon="chart"
+		Group item=gShellyOverTemp label="Перегрев Shelly" icon="fire"
+		Group item=gAstro label="Астро" icon="sunrise"
+		Group item=ZigbeeBridge
+
+    }
+}
