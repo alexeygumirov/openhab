@@ -1,0 +1,74 @@
+Switch SmartPlug1 "SmartPlug1" <camera> (gSocketSwitch) {channel="tplinksmarthome:hs100:home:switch"}
+
+String SecMessage "[%s]" <error> 
+
+//global switch
+Switch AllLight "Весь верхний свет [MAP(ru_switch.map):%s]" <light>
+
+Switch BedRoomLight "Свет в детской [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-BedRoom1:PowerSwitch0" }
+Number BedRoomShelly25R0Consumption_1 "Bedroom Light Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-BedRoom1:PowerSwitch0Power" }
+Number BedRoomShelly25R0EnergyCount_1 "Bedroom Light Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-BedRoom1:PowerSwitch0Energy" }
+// Number BedRoomShelly25R0EnergyCounter_1 "Bedroom Light Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Number BedRoomShelly25Temp_1 "Bedroom Shelly2.5 #1 [% 1.2f °C]" <temperature> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-BedRoom1:Shelly25Temp" }
+Contact BedRoomShelly25OverTemp_1 "Bedroom Shelly2.5 #1 Overtemp" <fire> (gRelays, gShellyOverTemp) { channel="mqtt:topic:myHomeBroker:shelly25-BedRoom1:Shelly25Overtemp" }
+
+Switch DilleLight "Свет в прихожей [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-Dille:PowerSwitch0" }
+Number DilleShelly25R0Consumption_1 "Dille Light Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-Dille:PowerSwitch0Power" }
+Number DilleShelly25R0EnergyCount_1 "Dille Light Energy Counter [%.3f kwh]" <line> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Dille:PowerSwitch0Energy" }
+// Number DilleShelly25R0EnergyCounter_1 "Dille Light Energy Counter [% 1.2f kwh]" <line> (gRelays, gEnergyCounterkWh)
+Number DilleShelly25Temp_1 "Dille Shelly2.5 #1 [% 1.2f °C]" <temperature> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Dille:Shelly25Temp" }
+Contact DilleShelly25OverTemp_1 "Dille Shelly2.5 #1 Overtemp" <fire> (gRelays, gShellyOverTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Dille:Shelly25Overtemp" }
+
+Switch KidRoom1Light "Свет в кабинете [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom1:PowerSwitch0" }
+Number KidRoom1Shelly25R0Consumption_1 "KidRoom1 Light Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom1:PowerSwitch0Power" }
+Number KidRoom1Shelly25R0EnergyCount_1 "KidRoom1 Light Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom1:PowerSwitch0Energy" }
+// Number KidRoom1Shelly25R0EnergyCounter_1 "KidRoom1 Light Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Number KidRoom1Shelly25Temp_1 "KidRoom1 Shelly2.5 #1 [% 1.2f °C]" <temperature> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom1:Shelly25Temp" }
+Contact KidRoom1Shelly25OverTemp_1 "KidRoom1 Shelly2.5 #1 Overtemp" <fire> (gRelays, gShellyOverTemp) { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom1:Shelly25Overtemp" }
+
+Switch KidRoom2Light "Свет в спальне [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom2:PowerSwitch0" }
+Number KidRoom2Shelly25R0Consumption_1 "KidRoom2 Light Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom2:PowerSwitch0Power" }
+Number KidRoom2Shelly25R0EnergyCount_1 "KidRoom2 Light Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom2:PowerSwitch0Energy" }
+// Number KidRoom2Shelly25R0EnergyCounter_1 "KidRoom2 Light Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Number KidRoom2Shelly25Temp_1 "KidRoom2 Shelly2.5 #1 [% 1.2f °C]" <temperature> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom2:Shelly25Temp" }
+Contact KidRoom2Shelly25OverTemp_1 "KidRoom2 Shelly2.5 #1 Overtemp" <fire> (gRelays, gShellyOverTemp) { channel="mqtt:topic:myHomeBroker:shelly25-KidRoom2:Shelly25Overtemp" }
+
+Switch KorrLight "Свет в коридоре [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-KorrDusche:PowerSwitch0" }
+Number KorrShelly25R0Consumption_1 "Korr Light Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-KorrDusche:PowerSwitch0Power" }
+Number KorrShelly25R0EnergyCount_1 "Korr Light Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-KorrDusche:PowerSwitch0Energy" }
+// Number KorrShelly25R0EnergyCounter_1 "Korr Light Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Switch DuscheLight "Свет в душе [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-KorrDusche:PowerSwitch1" }
+Number DuscheShelly25R1Consumption_1 "Dusche Light Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-KorrDusche:PowerSwitch1Power" }
+Number DuscheShelly25R1EnergyCount_1 "Dusche Light Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-KorrDusche:PowerSwitch1Energy" }
+// Number DuscheShelly25R1EnergyCounter_1 "Dusche Light Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Number KorrDuscheShelly25Temp_1 "KorrDusche Shelly2.5 #1 [% 1.2f °C]" <temperature> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-KorrDusche:Shelly25Temp" }
+Contact KorrDuscheShelly25OverTemp_1 "KorrDusche Shelly2.5 #1 Overtemp" <fire> (gRelays, gShellyOverTemp) { channel="mqtt:topic:myHomeBroker:shelly25-KorrDusche:Shelly25Overtemp" }
+
+Switch BadLight "Свет в ванной [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-Bad:PowerSwitch0" }
+Number BadShelly25R0Consumption_1 "Bad Light Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-Bad:PowerSwitch0Power" }
+Number BadShelly25R0EnergyCount_1 "Bad Light Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-Bad:PowerSwitch0Energy" }
+// Number BadShelly25R0EnergyCounter_1 "Bad Light Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Number BadShelly25Temp_1 "Bad Shelly2.5 #1 [% 1.2f °C]" <temperature> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Bad:Shelly25Temp" }
+Contact BadShelly25OverTemp_1 "Bad Shelly2.5 #1 Overtemp" <fire> (gRelays, gShellyOverTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Bad:Shelly25Overtemp" }
+
+Switch WohnLight1 "Свет в гостинной (кресло) [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-Wohn:PowerSwitch0" }
+Number WohnShelly25R0Consumption_1 "Wohn Light 1 Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-Wohn:PowerSwitch0Power" }
+Number WohnShelly25R0EnergyCount_1 "Wohn Light 1 Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-Wohn:PowerSwitch0Energy" }
+// Number WohnShelly25R0EnergyCounter_1 "Wohn Light 1 Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Switch WohnLight2 "Свет в гостинной (стол) [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-Wohn:PowerSwitch1" }
+Number WohnShelly25R1Consumption_1 "Wohn Light 2 Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-Wohn:PowerSwitch1Power" }
+Number WohnShelly25R1EnergyCount_1 "Wohn Light 2 Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-Wohn:PowerSwitch1Energy" }
+// Number WohnShelly25R1EnergyCounter_1 "Wohn Light 2 Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Number WohnShelly25Temp_1 "Wohn Shelly2.5 #1 [% 1.2f °C]" <temperature> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Wohn:Shelly25Temp" }
+Contact WohnShelly25OverTemp_1 "Wohn Shelly2.5 #1 Overtemp" <fire> (gRelays, gShellyOverTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Wohn:Shelly25Overtemp" }
+
+Switch KitchenLight1 "Свет в кухне (раковина) [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-Kitchen:PowerSwitch0" }
+Number KitchenShelly25R0Consumption_1 "Kitchen Light 1 Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-Kitchen:PowerSwitch0Power" }
+Number KitchenShelly25R0EnergyCount_1 "Kitchen Light 1 Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-Kitchen:PowerSwitch0Energy" }
+// Number KitchenShelly25R0EnergyCounter_1 "Kitchen Light 1 Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Switch KitchenLight2 "Свет в кухне (верхний) [MAP(ru_switch.map):%s]" <switch> (gLightSwitch) [ "Lighting" ] { channel="mqtt:topic:myHomeBroker:shelly25-Kitchen:PowerSwitch1" }
+Number KitchenShelly25R1Consumption_1 "Kitchen Light 2 Power Consumption [%d Watt]" <chart> (gRelays, gShellyEnergyConsumption) { channel="mqtt:topic:myHomeBroker:shelly25-Kitchen:PowerSwitch1Power" }
+Number KitchenShelly25R1EnergyCount_1 "Kitchen Light 2 Energy Counter [%.3f kWh]" <line> (gRelays, gEnergyCounterkWh) { channel="mqtt:topic:myHomeBroker:shelly25-Kitchen:PowerSwitch1Energy" }
+// Number KitchenShelly25R1EnergyCounter_1 "Kitchen Light 2 Energy Counter [% 1.2f kWh]" <line> (gRelays, gEnergyCounterkWh)
+Number KitchenShelly25Temp_1 "Kitchen Shelly2.5 #1 [% 1.2f °C]" <temperature> (gRelays, gShellyTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Kitchen:Shelly25Temp" }
+Contact KitchenShelly25OverTemp_1 "Kitchen Shelly2.5 #1 Overtemp" <fire> (gRelays, gShellyOverTemp) { channel="mqtt:topic:myHomeBroker:shelly25-Kitchen:Shelly25Overtemp" }

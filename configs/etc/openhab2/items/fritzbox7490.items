@@ -1,0 +1,27 @@
+Switch GuestWiFi "Guest WiFi" <network> (gFritzItems, gSocketSwitch) { fritzboxtr064="wifiGuestSwitch" }
+
+String fboxWanIP "FritzBox WAN IP [%s]" <lawnmower> (gfritzitems) { fritzboxtr064="wanip" }
+
+Number fboxDslDownstreamCurrRate "DSL Downstream Current [%s kbit/s]" <returnpipe> (gFritzItems) { fritzboxtr064="dslDownstreamCurrRate" }
+Number fboxDslUpstreamCurrRate "DSL Upstream Current [%s kbit/s]" <flowpipe> (gFritzItems) { fritzboxtr064="dslUpstreamCurrRate" }
+
+String fboxWanPhysicalLinkStatus "WAN physical link status [%s]" <niveau> (gFritzItems) { fritzboxtr064="wanPhysicalLinkStatus" }
+String fboxDslStatus "DSL Line Status [%s]" <niveau> (gFritzItems) { fritzboxtr064="dslStatus" }
+
+Number fboxWanPhysicalLinkStatusNum "WAN physical link status Numerical"
+Number fboxDslStatusNum "DSL Line Status Numerical"
+
+Number fboxWanLayer1DownstreamMaxBitRate "FritzBox WAN DOWN max bit rate [JS(convertbps2kbps.js):%s]" <returnpipe> (gFritzItems) { fritzboxtr064="wanLayer1DownstreamMaxBitRate" }
+Number fboxWanLayer1UpstreamMaxBitRate "FritzBox WAN UP max bit rate [JS(convertbps2kbps.js):%s]" <flowpipe> (gFritzItems) { fritzboxtr064="wanLayer1UpstreamMaxBitRate" }
+
+Number fboxDslDownstreamMaxRate "DSL Downstream Max [%s kbit/s]" (gFritzItems) { fritzboxtr064="dslDownstreamMaxRate" }
+Number fboxDslUpstreamMaxRate "DSL Upstream Max [%s kbit/s]" (gFritzItems) { fritzboxtr064="dslUpstreamMaxRate" }
+
+Number fboxDslUpstreamNoiseMargin "DSL Upstream Noise Margin [JS(convert2dB.js):%s]" (gFritzItems) { fritzboxtr064="dslUpstreamNoiseMargin" }
+Number fboxDslDownstreamNoiseMargin "DSL Downstream Noise Margin [JS(convert2dB.js):%s]" (gFritzItems) { fritzboxtr064="dslDownstreamNoiseMargin" }
+Number fboxDslUpstreamAttenuation "DSL Upstream Attenuation [JS(convert2dB.js):%s]" (gFritzItems) { fritzboxtr064="dslUpstreamAttenuation" }
+Number fboxDslDownstreamAttenuation "DSL Downstream Attenuation [JS(convert2dB.js):%s]" (gFritzItems) { fritzboxtr064="dslDownstreamAttenuation" }
+
+Number fboxDslFECErrors "DSL FEC Errors [%s]" { fritzboxtr064="dslFECErrors" }
+Number fboxDslHECErrors "DSL HEC Errors [%s]" { fritzboxtr064="dslHECErrors" }
+Number fboxDslCRCErrors "DSL CRC Errors [%s]" { fritzboxtr064="dslCRCErrors" }

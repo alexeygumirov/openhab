@@ -1,0 +1,3 @@
+Group ZigbeeBridge
+String ZigbeeBridgeState "Zigbee2mqtt Bridge State" (ZigbeeBridge) { channel="mqtt:topic:myHomeBroker:zigbeebridge:state" }
+Switch ZigbeeBridgePermitJoin "Zigbee2mqtt Bridge Permit join" (ZigbeeBridge) { channel="mqtt:topic:myHomeBroker:zigbeebridge:permitJoin" , expire="10m,command=OFF" }

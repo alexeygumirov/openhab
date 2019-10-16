@@ -1,0 +1,8 @@
+Group gSmartPlug
+Group gSmartPlugSwitch
+Group gSmartPlugPower
+Group gSmartPlugTotal
+
+Switch SmartPlug01 "Напольная лампа в гостинной [MAP(ru_switch.map):%s]" <switch> (gSmartPlug, gLightSwitch) { channel="mqtt:topic:myHomeBroker:AvatarSonoffPlug01:PowerSwitch" }
+Number SmartPlug01Power "Smart Plug 01 Power [%d Watt]" <chart> (gSmartPlug, gSmartPlugPower) { channel="mqtt:topic:myHomeBroker:AvatarSonoffPlug01:Power" }
+Number SmartPlug01Total "Smart Plug 01 Total [%1.2f kWh]" <chart> (gSmartPlug, gSmartPlugTotal) { channel="mqtt:topic:myHomeBroker:AvatarSonoffPlug01:Total" }

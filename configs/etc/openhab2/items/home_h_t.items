@@ -1,0 +1,23 @@
+Number BedRoom_Temperature "Температура в детской [%.1f °C]" <temperature> (gSensors, gTemperature) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BedRoom:temperature" }
+Number BedRoom_Humidity "Влажность в детской [%.1f %%]" <humidity> (gSensors, gHumidity) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BedRoom:humidity" }
+Number Battery_BedRoom_H_T_Sensor "Заряд батареи датчика вл. и темп. в спальне - детской [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BedRoom:battery" }
+
+Number KidRoom1_Temperature "Температура в кабинете [%.1f °C]" <temperature> (gSensors, gTemperature) { channel="mqtt:topic:myHomeBroker:t_h_sensor_KidRoom1:temperature" }
+Number KidRoom1_Humidity "Влажность в кабинете [%.1f %%]" <humidity> (gSensors, gHumidity) { channel="mqtt:topic:myHomeBroker:t_h_sensor_KidRoom1:humidity" }
+Number Battery_KidRoom1_H_T_Sensor "Заряд батареи датчика вл. и темп. в кабинете [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:t_h_sensor_KidRoom1:battery" }
+
+Number KidRoom2_Temperature "Температура в спальне [%.1f °C]" <temperature> (gSensors, gTemperature) { channel="mqtt:topic:myHomeBroker:t_h_sensor_KidRoom2:temperature" }
+Number KidRoom2_Humidity "Влажность в спальне [%.1f %%]" <humidity> (gSensors, gHumidity) { channel="mqtt:topic:myHomeBroker:t_h_sensor_KidRoom2:humidity" }
+Number Battery_KidRoom2_H_T_Sensor "Заряд батареи датчика вл. и темп. в спальне [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:t_h_sensor_KidRoom2:battery" }
+
+Number BathRoom_Temperature "Температура в ванной [%.1f °C]" <temperature> (gSensors, gTemperature) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BathRoom:temperature" }
+Number BathRoom_Humidity "Влажность в ванной [%.1f %%]" <humidity> (gSensors, gHumidity) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BathRoom:humidity" }
+Number Battery_BathRoom_H_T_Sensor "Заряд батареи датчика вл. и темп. в ванной [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:t_h_sensor_BathRoom:battery" }
+
+Number Kitchen_Temperature "Температура в кухне [%.1f °C]" <temperature> (gSensors, gTemperature) { channel="mqtt:topic:myHomeBroker:t_h_sensor_Kitchen:temperature" }
+Number Kitchen_Humidity "Влажность в кухне [%.1f %%]" <humidity> (gSensors, gHumidity) { channel="mqtt:topic:myHomeBroker:t_h_sensor_Kitchen:humidity" }
+Number Battery_Kitchen_H_T_Sensor "Заряд батареи датчика вл. и темп. в кухне [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:t_h_sensor_Kitchen:battery" }
+
+Number LivingRoom_Temperature "Температура в гостинной [%.1f °C]" <temperature> (gSensors, gTemperature) { channel="mqtt:topic:myHomeBroker:t_h_sensor_LivingRoom:temperature" }
+Number LivingRoom_Humidity "Влажность в гостинной [%.1f %%]" <humidity> (gSensors, gHumidity) { channel="mqtt:topic:myHomeBroker:t_h_sensor_LivingRoom:humidity" }
+Number Battery_LivingRoom_H_T_Sensor "Заряд батареи датчика вл. и темп. в гостинной [%d%%]" <batterylevel> (gBattery) { channel="mqtt:topic:myHomeBroker:t_h_sensor_LivingRoom:battery" }

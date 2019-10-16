@@ -1,0 +1,8 @@
+DateTime Sunrise_Time "Восход [%1$tH:%1$tM]" <sunrise> (gAstro) { channel="astro:sun:home:rise#start" }
+DateTime Sunset_Time "Закат [%1$tH:%1$tM]" <sunset> (gAstro) { channel="astro:sun:home:set#start" }
+Number:Intensity Total_Radiation "Солнечная радиация [%.2f %unit%]" <sun> (gAstro) { channel="astro:sun:home:radiation#total" }
+Number:Intensity Diffuse_Radiation "Диффузное излучение неба [%.2f %unit%]" <sun_clouds> (gAstro) { channel="astro:sun:home:radiation#diffuse" }
+// Number:Angle Azimuth "Azimuth" <none> (gAstro) { channel="astro:sun:home:position#azimuth" }
+// Number:Angle Elevation "Elevation" <none> (gAstro) { channel="astro:sun:home:position#elevation" }
+// String MoonPhase "MoonPhase" (gAstro) { channel="astro:moon:home:phase#name" }
+// Number:Length MoonDistance "MoonDistance [%.1f %unit%]" (gAstro) { channel="astro:moon:home:distance#distance" }
