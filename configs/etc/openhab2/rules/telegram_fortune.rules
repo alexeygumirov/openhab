@@ -1,0 +1,7 @@
+rule "fortune spam"
+when Time cron "0 0 8,12,18 * * ?"
+then
+    val fortune = executeCommandLine("/usr/games/fortune@@ru", 1000)
+  
+    sendTelegram("<my Telegram bot>", "**Случайная цитата:**\n" + fortune + "\n")
+end

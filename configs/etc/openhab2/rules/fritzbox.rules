@@ -1,0 +1,37 @@
+rule "WAN link status"
+when
+	Item fboxWanPhysicalLinkStatus changed or
+	Item fboxWanPhysicalLinkStatus received update
+then
+
+	var String WANStatus = fboxWanPhysicalLinkStatus.state.toString
+
+	if ( WANStatus == "Up") {
+		fboxWanPhysicalLinkStatusNum.postUpdate(0.5)
+	} else {
+
+		if ( WANStatus != "NULL") {
+			fboxWanPhysicalLinkStatusNum.postUpdate(0)
+		}
+
+	}
+
+end
+
+rule "DSL link status"
+when
+	Item fboxDslStatus changed or
+	Item fboxDslStatus received update
+then
+
+	var String DSLStatus = fboxDslStatus.state.toString
+
+	if ( DSLStatus == "Up") {
+		fboxDslStatusNum.postUpdate(1)
+	} else {
+		if ( DSLStatus != "NULL") {
+			fboxDslStatusNum.postUpdate(0)
+		}
+	}
+
+end

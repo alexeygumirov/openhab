@@ -1,0 +1,139 @@
+import org.openhab.model.script.actions.Timer
+
+var Timer DelayTimer = null
+
+// rules to send notification to Telegram and log in the case of security events
+rule "Windows Sensors alarm in absense"
+when
+   Member of gWindows changed
+then
+   
+   var String TrigItemName = triggeringItem.name
+   var String TrigItemLabel = triggeringItem.label
+   var String TrigItemCurState = triggeringItem.state.toString 
+
+   if (Person1_OwnTracks_Close.state==OFF && Person2_OwnTracks_Close.state==OFF) {
+
+      if (Person1Phone.state==CLOSED && Person2Phone.state==CLOSED) {
+
+         logInfo("telegram_security.rules", "SECURITY ALERT: The item " + TrigItemName + " changed state from " + previousState + " to " + TrigItemCurState)
+      
+         switch (TrigItemCurState) {
+            case "OPEN": { 
+                 sendTelegram("<my Telegram bot>", "ТРЕВОГА!\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " стало ОТКРЫТО.\n")
+				 SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+			}
+            case "CLOSED": {
+                 sendTelegram("<my Telegram bot>", "ТРЕВОГА!\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " стало ЗАКРЫТО.\n")
+				 SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+            }
+            default: {
+                 sendTelegram("<my Telegram bot>", "ТРЕВОГА!\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " в неопределенном состоянии: " + TrigItemCurState + "\n")
+				 SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+            }
+         }
+
+      }
+
+   }
+
+end
+
+rule "Doors Sensors alarm in absense"
+when
+   Member of gDoors changed
+then
+
+   var String TrigItemName = triggeringItem.name
+   var String TrigItemLabel = triggeringItem.label
+   var String TrigItemCurState = triggeringItem.state.toString
+
+   var int DelayInterval = 30
+
+   if (Person1_OwnTracks_Close.state==OFF && Person2_OwnTracks_Close.state==OFF) {
+
+      if ( TrigItemName == "Door_Entrance" ) {
+
+          DelayTimer = createTimer(now.plusSeconds(DelayInterval)) [|
+
+               if (Person1Phone.state==CLOSED && Person2Phone.state==CLOSED) {
+
+                  logInfo("telegram_security.rules", "SECURITY ALERT: The item " + TrigItemName + " changed state from " + previousState + " to " + TrigItemCurState)
+                  switch (TrigItemCurState) {
+                     case "OPEN": {
+                          sendTelegram("<my Telegram bot>", "ТРЕВОГА!\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " стала ОТКРЫТА.\n")
+						  SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+                     }
+                     case "CLOSED": {
+                          sendTelegram("<my Telegram bot>", "ТРЕВОГА!\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " стала ЗАКРЫТА.\n")
+				          SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+                     }
+                     default: {
+                          sendTelegram("<my Telegram bot>", "ТРЕВОГА!\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " в неопределенном состоянии: " + TrigItemCurState + "\n")
+				          SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+                     }
+                  }
+               }
+
+               DelayTimer = null
+            ]
+
+      } else {
+
+           logInfo("telegram_security.rules", "SECURITY ALERT: The item " + TrigItemName + " changed state from " + previousState + " to " + TrigItemCurState)
+
+           switch (TrigItemCurState) {
+              case "OPEN": {
+                   sendTelegram("<my Telegram bot>", "ТРЕВОГА!\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " стала ОТКРЫТА.\n")
+				   SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+              }
+              case "CLOSED": {
+                   sendTelegram("<my Telegram bot>", "ТРЕВОГА!\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " стала ЗАКРЫТА.\n")
+				   SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+              }
+              default: {
+                   sendTelegram("<my Telegram bot>", "ТРЕВОГА !\n Возможно, посторонний проник в дом.\n\n" + TrigItemLabel + " в неопределенном состоянии: " + TrigItemCurState + "\n")
+				   SecMessage.postUpdate("ТРЕВОГА!\n Возможно, посторонний проник в дом.") 
+              }
+           }
+      }
+
+   }
+
+end
+
+rule "Sensors warning absense"
+when
+   Item Person1Phone changed from OPEN to CLOSED or
+   Item Person2Phone changed from OPEN to CLOSED or
+   Item Person1_OwnTracks_Close changed from ON to OFF or
+   Item Person2_OwnTracks_Close changed from ON to OFF
+then
+
+   if (Person1Phone.state==CLOSED && Person2Phone.state==CLOSED) {
+
+      if (Person1_OwnTracks_Close.state==OFF && Person2_OwnTracks_Close.state==OFF) {
+
+         if (! gLightSwitch.allMembers.filter([state.toString == "ON"]).empty) {
+
+			gLightSwitch.allMembers.filter([state.toString == "ON"]).forEach[s | s.sendCommand(OFF)]
+
+		 }
+
+         if (! gSensors.allMembers.filter([state.toString == "OPEN"]).empty) {
+
+            val LogReport = gSensors.allMembers.filter([state.toString == "OPEN"]).sortBy([name]).map[name].join("\n")
+            val TelegramReport = gSensors.allMembers.filter([state.toString == "OPEN"]).sortBy([name]).map[label].join("\n")
+            
+            logInfo("telegram_security.rules", "SECURITY WARNING: In absence following Items are kept OPEN:\n" + LogReport)
+            sendTelegram("<my Telegram bot>", "ВНИМАНИЕ!\nВы ушли из дома и не закрыли:\n\n" + TelegramReport + "\n")
+		
+            SecMessage.postUpdate("ВНИМАНИЕ!\nВы ушли из дома и не закрыли:\n" + TelegramReport) 
+         
+         }
+
+      }
+
+   }
+
+end

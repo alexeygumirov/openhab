@@ -1,0 +1,210 @@
+//Rules to send to Telegram
+rule "Person1 WiFi presence detection"
+when
+	Item Person1Phone changed
+then
+    
+	var String CurState = Person1Phone.state.toString
+	var String ItemName = Person1Phone.name
+	var String LogTopic = "home_presence.rules"
+   
+	switch (CurState) {
+		case "OPEN": {
+			logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " changed state to " + CurState)
+			Person1PresenceStatus.postUpdate("HOME")
+			if (SmartPlug1.state == ON) {
+				SmartPlug1.sendCommand(OFF)
+				sendTelegram("<my Telegram bot>", "БЕЗОПАСНОСТЬ:\n\nВидеонаблюдение ВЫКЛючено.\n")
+				logInfo(LogTopic, "CAMERA: Video monitoring is OFF.")
+			}
+			Person1_OwnTracks_FarAway.postUpdate(OFF)
+			Person1_OwnTracks_Close.postUpdate(ON)
+			SecMessage.postUpdate("\nСообщений нет.")
+		}
+		case "CLOSED": {
+			logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " changed state to " + CurState)
+		}
+		default: {
+			logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " has undefined state: " + CurState)
+		}
+	}
+
+end
+
+rule "Person2 WiFi presence detection"
+when
+	Item Person2Phone changed
+then
+   
+	var String CurState = Person2Phone.state.toString
+	var String ItemName = Person2Phone.name
+	var String LogTopic = "home_presence.rules"
+   
+	switch (CurState) {
+		case "OPEN": {
+			logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " changed state to " + CurState)
+			Person2PresenceStatus.postUpdate("HOME")
+			if (SmartPlug1.state == ON) {
+				SmartPlug1.sendCommand(OFF)
+				sendTelegram("<my Telegram bot>", "Видеонаблюдение ВЫКЛючено.")
+				logInfo(LogTopic, "CAMERA: Video monitoring is OFF.")
+			}
+			Person2_OwnTracks_FarAway.postUpdate(OFF)
+			Person2_OwnTracks_Close.postUpdate(ON)
+			SecMessage.postUpdate("\nСообщений нет.")
+		}
+		case "CLOSED": {
+			logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " changed state to " + CurState)
+		}
+		default: {
+			logInfo(LogTopic, "WIFI PRESENCE: The item " + ItemName + " has undefined state: " + CurState)
+		}
+	}
+
+end
+
+rule "Security Camera rule"
+when
+	Item Person1_OwnTracks_FarAway changed from OFF to ON or
+	Item Person2_OwnTracks_FarAway changed from OFF to ON
+then
+
+	var String LogTopic = "home_presence.rules"
+	var String message = SecMessage.state.toString
+
+	if ( Person1_OwnTracks_FarAway.state.toString == "ON" && Person2_OwnTracks_FarAway.state.toString == "ON") {
+		if (SmartPlug1.state == OFF) {
+			SmartPlug1.sendCommand(ON)
+			logInfo(LogTopic, "CAMERA: Video monitoring is ON.")
+			sendTelegram("<my Telegram bot>", "БЕЗОПАСНОСТЬ:\n\nВидеонаблюдение включено.\n")
+			SecMessage.postUpdate(message + "\nВидеонаблюдение включено.")
+		} 
+	}
+
+end
+
+rule "Person1 proximity tracking"
+when
+	Item Person1_OwnTracks_GeoLoc_raw changed
+then
+
+    val String json = (Person1_OwnTracks_GeoLoc_raw.state as StringType).toString
+		val String type = transform("JSONPATH", "$._type", json)
+			if (type == "location") {
+				val String lat  = transform("JSONPATH", "$.lat", json)
+				val String lon  = transform("JSONPATH", "$.lon", json)
+
+				Person1_OwnTracks_GeoLoc.postUpdate(lat + "," + lon)
+			}
+
+	var String WiFiState = Person1Phone.state.toString
+
+	var PointType home = new PointType("<home lat>,<home lon>")
+	var PointType work = new PointType("<work lat>,<work lon>")
+	var PointType Person1 = new PointType(Person1_OwnTracks_GeoLoc.state.toString)
+	var String LogTopic = "home_presence.rules"
+	var Number A = Person1.distanceFrom(home)
+	var Number DistWork = Person1.distanceFrom(work)
+	var Number Check = 0
+	
+	if ( DistWork < 500 ) {
+		Person1PresenceStatus.postUpdate("work")
+		Check = 1
+		logInfo(LogTopic, "GEO PRESENCE: Person1 is near Work.")
+	}
+	
+	switch A {
+		case A < 80 : {
+			if ( WiFiState != "OPEN" ) {
+				Person1PresenceStatus.postUpdate("NEARHOME")
+				logInfo(LogTopic, "GEO PRESENCE: Person1 is NEAR HOME.")
+			}
+			if ( WiFiState == "OPEN" ) {
+				Person1PresenceStatus.postUpdate("HOME")
+				logInfo(LogTopic, "GEO PRESENCE: Person1 is HOME.")
+			}
+			Person1_OwnTracks_Close.postUpdate(ON)
+		}
+		case A < 3500 : {
+			if ( Check == 0 ) {
+				Person1PresenceStatus.postUpdate("FARAWAY")
+				logInfo(LogTopic, "GEO PRESENCE: Person1 is FAR AWAY.")
+			}
+			Person1_OwnTracks_Close.postUpdate(OFF)
+		}
+		case A >= 3500 : {
+			if ( Check == 0 ) {
+				Person1PresenceStatus.postUpdate("VERYFAR")
+				logInfo(LogTopic, "GEO PRESENCE: Person1 is VERY FAR AWAY.")
+			}
+			Person1_OwnTracks_FarAway.postUpdate(ON)
+			Person1_OwnTracks_Close.postUpdate(OFF)
+		}
+	}
+
+	Person1_Distance_from_Home.postUpdate(A)
+
+end
+
+rule "Person2 proximity tracking"
+when
+	Item Person2_OwnTracks_GeoLoc_raw changed
+then
+
+    val String json = (Person2_OwnTracks_GeoLoc_raw.state as StringType).toString
+		val String type = transform("JSONPATH", "$._type", json)
+			if (type == "location") {
+				val String lat  = transform("JSONPATH", "$.lat", json)
+				val String lon  = transform("JSONPATH", "$.lon", json)
+
+				Person2_OwnTracks_GeoLoc.postUpdate(lat + "," + lon)
+			}
+
+	var String WiFiState = Person2Phone.state.toString
+
+	var PointType home = new PointType("<home lat>,<home lon>")
+	var PointType work = new PointType("<work lat>,<work lon>")
+	var PointType Person2 = new PointType(Person2_OwnTracks_GeoLoc.state.toString)
+	var String LogTopic = "home_presence.rules"
+	var Number A = Person2.distanceFrom(home)
+	var Number DistWork = Person2.distanceFrom(work)
+	var Number Check = 0
+
+	if ( DistWork < 500 ) {
+		Person2PresenceStatus.postUpdate("work")
+		Check = 1
+		logInfo(LogTopic, "GEO PRESENCE: Person2 is near Work.")
+	}
+
+	switch A {
+		case N < 80 : {
+			if ( WiFiState != "OPEN" ) {
+				Person2PresenceStatus.postUpdate("NEARHOME")
+				logInfo(LogTopic, "GEO PRESENCE: Person2 is NEAR HOME.")
+			}
+			if ( WiFiState == "OPEN" ) {
+				Person2PresenceStatus.postUpdate("HOME")
+				logInfo(LogTopic, "GEO PRESENCE: Person2 is HOME.")
+			}
+			Person2_OwnTracks_Close.postUpdate(ON)
+		}
+		case N < 3500 : {
+			if ( Check == 0 ) {
+				Person2PresenceStatus.postUpdate("FARAWAY")
+				logInfo(LogTopic, "GEO PRESENCE: Person2 is FAR AWAY.")
+			}
+			Person2_OwnTracks_Close.postUpdate(OFF)
+		}
+		case N >= 3500 : {
+			if ( Check == 0 ) {
+				Person2PresenceStatus.postUpdate("VERYFAR")
+				logInfo(LogTopic, "GEO PRESENCE: Person2 is VERY FAR AWAY.")
+			}
+			Person2_OwnTracks_FarAway.postUpdate(ON)
+			Person2_OwnTracks_Close.postUpdate(OFF)
+		}
+	}
+
+	Person2_Distance_from_Home.postUpdate(A) 	
+
+end
