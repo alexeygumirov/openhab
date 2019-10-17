@@ -19,19 +19,22 @@ In order to improve system stability and performance I connected external SSD vi
 - Letsencrypt logs
 
 Following defices are connected and automated in my OpenHab2 automation setup:
-
 - ZigBee devices integrated via Zigbee2MQTT bridge:
 	- Xioami Aqara contact sensors for doors and windows (Zigbee).
 	- Xiaomi Aqare temperature and humidity sensorsn.
 - User location tracking with OwnTracks application on smartphones:
 	- OwnTracks is connected to MQTT bus via TLS protected connection.
-
 - TP-Link HS100 SmartPlug (WiFi)
 - Fritz!Box 7490:
-
 	- MAC addresses presence tracking.
 	- Guest Wi-Fi ON/OFF control.
 
+To collect metrics and present them I use [InfluxDB](https://docs.influxdata.com/influxdb/v1.7/) and [Grafana](https://grafana.com/) in Docker containers.
+InfluxDB also provides me persistence for the OpenHab.
+
+All OpenHab configuration I do via config files, not GUI. This approach is more robust and also gives you ability to migrate OpenHab configuration to other system.
+
+Additional information:
 - OpenHab is behind Nginx reverse proxy with TLS authentication [Let's Encrypt](https://letsencrypt.org/).
 - The same TLS certificates are used by Mosquitto WebSocket.
 - Connection to Telegram Messanger channel for notifications.
