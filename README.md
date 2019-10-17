@@ -10,15 +10,21 @@ I run my OpenHab2 automation on the Raspberry Pi 2 Model B. It includes:
 - [MQTT Bus](http://mqtt.org/)
 - [Zigbee2MQTT bridge](https://github.com/Koenkk/zigbee2mqtt)
 
-I use standard Raspbian OS.
+I use Raspberry Pi 2B+ with standard "Raspbian GNU/Linux 9 (stretch)" distribution there.
+
+In order to improve system stability and performance I connected external SSD via USB port to the Raspberry and moved (symlinked) all large and regularly updated logs there:
+- MQTT (Mosquitto) logs
+- NGINX logs
+- Openhab logs
+- Letsencrypt logs
 
 Following defices are connected and automated in my OpenHab2 automation setup:
 
-- Xioami Aqara contact sensors for doors and windows (Zigbee). They are integrated via Zigbee2MQTT bridge.
-- Xiaomi Aqare temperature and humidity sensors.
+- ZigBee devices integrated via Zigbee2MQTT bridge:
+	- Xioami Aqara contact sensors for doors and windows (Zigbee).
+	- Xiaomi Aqare temperature and humidity sensorsn.
 - User location tracking with OwnTracks application on smartphones:
-
-	- OwnTracks is connected to MQTT bus via secured connection.
+	- OwnTracks is connected to MQTT bus via TLS protected connection.
 
 - TP-Link HS100 SmartPlug (WiFi)
 - Fritz!Box 7490:
