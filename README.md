@@ -2,7 +2,7 @@
 
 In this repository I share my OpenHab2 configuration files.
 
-## Short setup description
+## Short description of the setup
 
 I run my OpenHab2 automation on the Raspberry Pi 2 Model B. It includes:
 
