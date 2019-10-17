@@ -1,4 +1,4 @@
-# OpenHab
+# My OpenHab project
 
 In this repository I share my OpenHab2 configuration files.
 
