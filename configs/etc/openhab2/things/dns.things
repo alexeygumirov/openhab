@@ -1,0 +1,2 @@
+network:pingdevice:FreeDNS "FreeDNS" [ hostname="172.104.237.57", retry=1, timeout=5000, refreshInterval=60000 ]
+network:pingdevice:dnsWatch "DNS.Watch" [ hostname="84.200.70.40", retry=1, timeout=5000, refreshInterval=60000 ]

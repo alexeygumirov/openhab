@@ -1,0 +1,27 @@
+rule "Common light switch status update" 
+when
+	Member of gLightSwitch changed
+then 
+
+	if (gLightSwitch.allMembers.filter([state.toString == "ON"]).empty) {
+
+		AllLight.postUpdate(OFF)	
+
+	} else {
+
+		AllLight.postUpdate(ON)	
+
+	}
+
+end
+
+rule "Common light switch command OFF"
+when
+	Item AllLight received command OFF
+then 
+
+	gLightSwitch.allMembers.filter([state.toString == "ON"]).forEach[s | s.sendCommand(OFF)]
+
+	AllLight.postUpdate(OFF)	
+
+end

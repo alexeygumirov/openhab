@@ -109,5 +109,14 @@ sitemap wurzerstr89 label="Wurzerstr89" icon="firstfloor" {
 		Group item=gAstro label="Астро" icon="sunrise"
 		Group item=ZigbeeBridge
 
+		Text label="Network Pings" {
+
+			Text item=FritzBox valuecolor=[1="green",0="red"]
+			Text item=Synology valuecolor=[1="green",0="red"]
+			Text item=FreeDNS valuecolor=[1="green",0="red"]
+			Text item=DNSWatch valuecolor=[1="green",0="red"]
+
+		}
+
     }
 }

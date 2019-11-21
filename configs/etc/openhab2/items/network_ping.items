@@ -1,0 +1,5 @@
+Group gNetPing
+Number FritzBox "FritzBox 7490 [MAP(on_off.map):%s]" <player> (gNetPing) { channel="network:pingdevice:fritzbox7490:online" }
+Number Synology "Synology NAS [MAP(on_off.map):%s]" <video> (gNetPing) { channel="network:pingdevice:synology:online" }
+Number FreeDNS "FreeDNS [MAP(on_off.map):%s]" (gNetPing) { channel="network:pingdevice:FreeDNS:online" }
+Number DNSWatch "DNS.Watch [MAP(on_off.map):%s]" (gNetPing) { channel="network:pingdevice:dnsWatch:online" }
