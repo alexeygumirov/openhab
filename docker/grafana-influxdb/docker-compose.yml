@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+    
+    db:
+        image: influxdb:latest 
+        container_name: influxdb_openhab
+        restart: always
+        network_mode: host
+        volumes:
+            - /media/usbhdd/influxdb:/var/lib/influxdb
+
+    front:
+        image: grafana/grafana:latest
+        container_name: grafana_openhab
+        restart: always
+        network_mode: host
+        depends_on:
+            - db
+        volumes:
+            - grafana-storage:/var/lib/grafana
+
+volumes:
+    grafana-storage:
+        external: true
+        name: grafana-storage
+
