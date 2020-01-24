@@ -31,6 +31,7 @@ Following defices are connected and automated in my OpenHab2 automation setup:
 
 To collect metrics and present them I use [InfluxDB](https://docs.influxdata.com/influxdb/v1.7/) and [Grafana](https://grafana.com/) in Docker containers.
 InfluxDB also provides me persistence for the OpenHab.
+For the initial setup of the InfluxDB I used following tutorial: [Setting up InfluxDB and Grafana using Docker](https://www.home-assistant.io/blog/2017/04/25/influxdb-grafana-docker/). While this tutorial is on the **Home Assistant** page, this works for **OpenHab** as well.
 
 All OpenHab configuration I do via config files, not GUI. This approach is more robust and also gives you ability to migrate OpenHab configuration to other system.
 
@@ -95,4 +96,4 @@ Before you are going to bring up containers first time using this compose file, 
 docker create volume grafana-storage
 ```
 
-Or you can use direct path mapping for Grafana volume, the same way as for InfluxDB. Then you have just create a folder for Grafan on your drive and map it to the container `/var/lib/grafana`. 
+Or you can use direct path mapping for Grafana volume, the same way as for InfluxDB. Then you have just create a folder for Grafan on your drive and map it to the container's directory `/var/lib/grafana`. 
