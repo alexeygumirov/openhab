@@ -10,7 +10,7 @@ I run my OpenHab2 automation on the Raspberry Pi 2 Model B. It includes:
 - [MQTT Bus](http://mqtt.org/)
 - [Zigbee2MQTT bridge](https://github.com/Koenkk/zigbee2mqtt)
 
-I use Raspberry Pi 2B+ with standard "Raspbian GNU/Linux 9 (stretch)" distribution there.
+I use Raspberry Pi 2B+ with "Raspbian GNU/Linux 10 (buster)" distribution there.
 
 In order to improve system stability and performance I connected external SSD via USB port to the Raspberry and moved (via symlink) all large and regularly updated logs there:
 - MQTT (Mosquitto) logs
@@ -42,9 +42,9 @@ Additional information:
 - I use Basic UI for the web-page.
 - On the smart phone I use [OpenHab App beta](https://play.google.com/store/apps/details?id=org.openhab.habdroid.beta&hl=en). It works fine. But if you do not like "beta" in the name, you can use stable release version instead: [OpenHab App](https://play.google.com/store/apps/details?id=org.openhab.habdroid&hl=en).
 
-## Grafana and InfluxDB containers
+## Containers
 
-I run Grafana and InfluxDB in docker containers. In order to avoid complicated networking setup, I use `host` networking for both.
+I run Grafana, InfluxDB and Zigbee2mqtt in docker containers. In order to avoid complicated networking setup, I use `host` networking for all of them.
 To launch containers I use following `docker-compose.yml` file:
 
 ```yaml
@@ -69,6 +69,16 @@ services:
         volumes:
             - grafana-storage:/var/lib/grafana
 
+    zigbee2mqtt:
+        image: koenkk/zigbee2mqtt:1.6.0-arm32v6
+        container_name: zigbee2mqtt
+        restart: always
+        network_mode: host
+        volumes:
+            - <your path to data folder with zigbee2mqtt configuration>:/app/data
+        devices:
+            - /dev/ttyACM0:/dev/ttyACM0
+
 volumes:
     grafana-storage:
         external: true
@@ -88,6 +98,11 @@ docker run -d --restart always \
 docker run -d --restart always \
 	--name=grafana_openhab --volume=grafana-storage:/var/lib/grafana \
 	--network host grafana/grafana
+
+docker run -d --restart always \
+	--name=zigbee2mqtt --volume=<your path to data folder with zigbee2mqtt configuration>:/app/data \
+	--device=/dev/ttyACM0:/dev/ttyACM0 \
+	--network host koenkk/zigbee2mqtt:1.6.0-arm32v6
 ```
 
 Before you are going to bring up containers first time using this compose file, you shall create docker volume for Grafana using following command:
