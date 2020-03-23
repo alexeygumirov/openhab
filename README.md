@@ -36,6 +36,7 @@ For the initial setup of the InfluxDB I used following tutorial: [Setting up Inf
 All OpenHab configuration I do via config files, not GUI. This approach is more robust and also gives you ability to migrate OpenHab configuration to other system.
 
 Additional information:
+- NGINX and Mosquitto are exposed via IPv4 and IPv6 connections (Dual Stack).
 - OpenHab is behind Nginx reverse proxy with TLS authentication [Let's Encrypt](https://letsencrypt.org/).
 - The same TLS certificates are used by Mosquitto.
     - > It is importanto to mention, that Mosquitto DOES NOT work correctly with IPv6 via WebSockets. Therefore I am using standard Mosquitto protocol with TLS protection.
