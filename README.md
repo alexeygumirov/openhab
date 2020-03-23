@@ -37,7 +37,8 @@ All OpenHab configuration I do via config files, not GUI. This approach is more 
 
 Additional information:
 - OpenHab is behind Nginx reverse proxy with TLS authentication [Let's Encrypt](https://letsencrypt.org/).
-- The same TLS certificates are used by Mosquitto WebSocket.
+- The same TLS certificates are used by Mosquitto.
+    - > It is importanto to mention, that Mosquitto works correctly with IPv6 only via WebSockets. Therefore I am using standard Mosquitto protocol with TLS protection.
 - Connection to Telegram messenger channel for notifications.
 - I use Basic UI for the web-page.
 - On the smart phone I use [OpenHab App beta](https://play.google.com/store/apps/details?id=org.openhab.habdroid.beta&hl=en). It works fine. But if you do not like "beta" in the name, you can use stable release version instead: [OpenHab App](https://play.google.com/store/apps/details?id=org.openhab.habdroid&hl=en).
