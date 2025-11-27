@@ -1,3 +1,13 @@
+# 👋 THIS REPOSITORY HAS MOVED! 👋
+
+**This repository is no longer actively maintained on GitHub.**
+
+Please update your bookmarks and remotes to the new home on Codeberg:
+
+➡️ **[https://codeberg.org/alexeygumirov/openhab](https://codeberg.org/alexeygumirov/openhab)** ⬅️
+
+Thank you for your understanding!
+
 # My OpenHab project
 
 In this repository I share my OpenHab2 configuration files.
